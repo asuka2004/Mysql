@@ -1,6 +1,6 @@
 
 Mysql學習筆記  
-儘可能將Mysql 自動化
+儘可能將 Mysql 一切自動化
 
 1.Mysql安裝  
 
