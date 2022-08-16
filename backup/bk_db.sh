@@ -21,9 +21,6 @@ SOCKET=/var/lib/mysql/mysql.sock
 MYCMD="mysql --login-path=Kung -S $SOCKET -h localhost"
 MYDUMP="mysqldump --login-path=Kung -S $SOCKET -h localhost --no-tablespaces --single-transaction"
 
-Create_db(){
-	$MYCMD -e "create database db2;use db2;create table test(id int(7) zerofill auto_increment not null,username varchar(20),servnumber varchar(30),password varchar(20),createtime datetime,primary key (id))DEFAULT CHARSET=utf8;source /root/tmp/sql.txt;"
-}
 
 Backup_db(){
 	for dbname in `$MYCMD -e "show databases;"|sed '1d'|egrep -v "mysql|schema|performance_schema|sys|information_schema"` 
@@ -34,7 +31,7 @@ Backup_db(){
 }
 
 Del_db(){
-	$MYCMD -e "use db2;truncate table test;"	
+	$MYCMD -e "use db1;truncate table test;"	
 }
 
 Restore_db(){
@@ -42,9 +39,7 @@ Restore_db(){
 	$MYCMD ${dbname}<${DBPATH}/${dbname}_$(date +%F)/${dbname}.sql	
 }
 
-Main(){
-	Create_db
-	echo "Create database and table. Please Wait ....."
+main(){
 	Backup_db
 	echo "Backup table. Please wait ........"
 	Del_db	
@@ -52,4 +47,4 @@ Main(){
 	Restore_db
 	echo "Restore information Please wait....."
 }
-Main
+main
