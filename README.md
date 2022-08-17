@@ -14,15 +14,15 @@
 
 1.執行create_data.sh 可以產生千萬級別的sql語法，並source /tmp/sql.txt匯入
  
-2.執行crud.sh，可以新增、刪除、修改、查詢資料
+2.執行crud_mysql.sh，可以新增、刪除、修改、查詢資料
 
 ### Backup DB Script
     
-執行backup_db.sh，備份、刪除、還原資料庫
+執行bk_mysql.sh，備份、刪除、還原資料庫
 
 ### Monitor DB Script
     
-1.執行monitor_db，監控Mysql 
+1.執行monitor_mysql，監控Mysql 
 
 2.加入排程，指令如下
 
