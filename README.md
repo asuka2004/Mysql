@@ -1,6 +1,6 @@
 # Mysql 學習筆記  
 
-作業環境  OS: CentOS 7.9  DB: Mysql 5.7
+作業環境  OS: CentOS 7.9  DB: Mysql 5.7  目前採用二進制安裝
 
 官網載點  網址如下 https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.37-el7-x86_64.tar.gz
 
