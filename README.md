@@ -25,5 +25,7 @@
 1.執行monitor_db，監控Mysql並加入排程 
 
 2.加入排程 指令如下
-   echo "Monitor DB" >>/var/spool/cron/root
-   echo */5 * * * * /use/bin/sh -x /root/project/Mysql/monitor/monitor_db.sh >>/var/spool/cron/root
+
+echo "Monitor DB" >>/var/spool/cron/root
+
+echo */5 * * * * /use/bin/sh -x /root/project/Mysql/monitor/monitor_db.sh >>/var/spool/cron/root
