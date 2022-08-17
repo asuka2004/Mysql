@@ -24,7 +24,7 @@
     
 1.執行monitor_db，監控Mysql並加入排程 
 
-2.加入排程 指令如下
+2.加入排程，指令如下
 
 echo "Monitor DB" >>/var/spool/cron/root
 
