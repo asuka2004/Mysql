@@ -8,7 +8,7 @@
 export PS4='++ ${LINENO}'  
 export LANG=C
 export PATH=$PATH
-export MYSQL_PWD=${password}
+#export MYSQL_PWD=${password}
 [ -f /etc/init.d/functions ] && . /etc/init.d/functions
 
 
