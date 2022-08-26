@@ -12,7 +12,7 @@ export PATH=$PATH
 
 App_Path=/app
 [ ! -d ${App_Path} ] && mkdir -p ${App_Path}
-Soft_Path=/soft
+Soft_Path=/tool/soft
 [ ! -d ${Soft_Path} ] && mkdir -p ${Soft_Path}
 
 Check_User(){

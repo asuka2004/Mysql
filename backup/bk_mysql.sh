@@ -6,21 +6,15 @@
 # System      : CentOS 7.9
 			       
 export PS4='++ ${LINENO}'  
-export LANG=C
 export PATH=$PATH
-export MYSQL_PWD=${password}
 [ -f /etc/init.d/functions ] && . /etc/init.d/functions
-Script_Path=/root/github
-[ ! -d ${Script_Path} ] && mkdir -p ${Script_Path}
-Log_Path=/root/tmp
-[ ! -d ${Log_Path} ] && mkdir -p ${Log_Path}
-DBPATH=/root/tmp
+
+DBPATH=/app/mysql/log
 [ ! -d "$DBPATH" ] && mkdir $DBPATH
 
 SOCKET=/var/lib/mysql/mysql.sock
 MYCMD="mysql --login-path=Kung -S $SOCKET -h localhost"
 MYDUMP="mysqldump --login-path=Kung -S $SOCKET -h localhost --no-tablespaces --single-transaction"
-
 
 Backup_db(){
 	for dbname in `$MYCMD -e "show databases;"|sed '1d'|egrep -v "mysql|schema|performance_schema|sys|information_schema"` 
