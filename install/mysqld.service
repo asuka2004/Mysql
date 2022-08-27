@@ -48,10 +48,11 @@ TimeoutSec=0
 PermissionsStartOnly=true
 
 # Needed to create system tables
-ExecStartPre=/usr/bin/mysqld_pre_systemd
+#ExecStartPre=/app/mysql/bin/mysqld_pre_systemd
 
 # Start main service
-ExecStart=/usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid $MYSQLD_OPTS
+#ExecStart=/app/mysql/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid $MYSQLD_OPTS
+ExecStart=/app/mysql/bin/mysqld --defaults-file=/etc/my.cnf
 
 # Use this to switch malloc implementation
 EnvironmentFile=-/etc/sysconfig/mysql
