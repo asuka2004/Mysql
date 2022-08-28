@@ -46,7 +46,7 @@ Read_db(){
 
 Update_db(){
 	echo "Del user. Please wait ........"
-	$MYCMD -e "use db1;update test set username='Kung' where username='user0';"
+	$MYCMD -e "use db1;update test set username='Kung' where username='user100';"
 	if [ $? -eq 0 ] 
          then
                  action "Success to update " /bin/true
