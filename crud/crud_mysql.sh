@@ -34,19 +34,19 @@ Create_db(){
 
 Read_db(){
 	echo "Select user. Please wait 10........"
-	$MYCMD -e "use db1;select * from test where username='user0';"
+	$MYCMD -e "use db1;select * from test where username='user10';"
 	if [ $? -eq 0 ] 
          then
-                 action "Success to read " /bin/true
+                 action "Success to select user " /bin/true
         else
-                 action "Fail to read" /bin/false
+                 action "Fail to select user" /bin/false
 		 exit
         fi  
 }
 
 Update_db(){
-	echo "Del user. Please wait ........"
-	$MYCMD -e "use db1;update test set username='Kung' where username='user100';"
+	echo "Del user. Please wait 10........"
+	$MYCMD -e "use db1;update test set username='Kung' where username='user10';"
 	if [ $? -eq 0 ] 
          then
                  action "Success to update " /bin/true
@@ -57,8 +57,8 @@ Update_db(){
 }
 
 Delete_db(){
-	echo "Delete user. Please wait....."
-	$MYCMD -e "use db1;delete from test where username='Kung';"
+	echo "Delete user. Please wait 10....."
+	$MYCMD -e "use db1;delete from test where username='user100';"
 	if [ $? -eq 0 ] 
          then
                  action "Success to delete " /bin/true
@@ -70,8 +70,11 @@ Delete_db(){
 
 main(){
 	Create_db
+	echo "-------------------------------------------------------"
 	Read_db
+	echo "-------------------------------------------------------"
 	Update_db	
+	echo "-------------------------------------------------------"
 	Delete_db
 }
 main

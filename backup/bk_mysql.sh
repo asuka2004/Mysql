@@ -49,7 +49,7 @@ Del_db(){
 }
 
 Restore_db(){
-	echo "Restore information Please wait....."
+	echo "Restore db. Please wait....."
 	gunzip ${DBPATH}/db1_2022-08-28/db1.sql.gz 
 	$MYCMD db1<${DBPATH}/db1_2022-08-28/db1.sql
 	if [ $? -eq 0 ] 
@@ -63,7 +63,9 @@ Restore_db(){
 
 main(){
 	Backup_db
-	Del_db	
+	echo "-----------------------------------------------------------------"
+	Del_db
+	echo "-----------------------------------------------------------------"	
 	Restore_db
 }
 main
