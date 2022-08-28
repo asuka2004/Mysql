@@ -6,26 +6,23 @@
 
 ### Install DB Script
 
-腳本內容: 下載Mysql、執行解壓縮及並初始化、環境設定、啟動DB等。 
+1.安裝腳本: install_mysql.sh 
 
-下载Script脚本、Mysql程式、配置文件，執行install_mysql.sh
- 
+2.Mysql設定檔: my.cnf 
+
+3.常駐程式設定檔: mysqld.service
+
 ### CRUD Script
 
-1.執行create_data.sh 可以產生千萬級別的sql語法，並source /tmp/sql.txt匯入
+1.create_data.sh 可以產生大量的sql語法檔案sql.txt，並由crud_mysql.sh匯入mysql
  
-2.執行crud_mysql.sh，可以新增、刪除、修改、查詢資料
+2.crud_mysql.sh，新增、刪除、修改、查詢資料
 
 ### Backup DB Script
     
-執行bk_mysql.sh，備份、刪除、還原資料庫
+1.bk_mysql.sh，備份、刪除、還原資料庫
 
 ### Monitor DB Script
     
-1.執行monitor_mysql，監控Mysql 
+1.monitor_mysql.sh，監控Mysql並加入排程 
 
-2.加入排程，指令如下
-
-echo "Monitor DB" >>/var/spool/cron/root
-
-echo */5 * * * * /use/bin/sh -x /root/project/Mysql/monitor/monitor_db.sh >>/var/spool/cron/root
