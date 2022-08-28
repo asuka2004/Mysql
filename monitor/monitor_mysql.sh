@@ -22,7 +22,7 @@ if [ `grep "monitor_mysql" ${File_Path}|wc -l` -lt 1 ]
 	echo "Monitor DB" >>/var/spool/cron/root
 	echo "*/5 * * * * /bin/sh  ${Soft_Path}/script/monitor_mysql.sh" >>/var/spool/cron/root
 else
-	echo " "		
+	echo "Nothing ">/dev/null 2>&1		
 fi
 
 
