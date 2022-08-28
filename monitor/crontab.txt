@@ -1,2 +1,2 @@
 echo "Monitor DB" >>/var/spool/cron/root
-echo */5 * * * * /use/bin/sh -x /root/project/Mysql/monitor/monitor_db.sh >>/var/spool/cron/root
+echo */5 * * * * /bin/sh /tool/script/monitor_db.sh >>/var/spool/cron/root
