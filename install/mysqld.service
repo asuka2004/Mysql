@@ -39,7 +39,7 @@ Group=mysql
 
 Type=forking
 
-PIDFile=/var/run/mysqld/mysqld.pid
+#PIDFile=/var/run/mysqld/mysqld.pid
 
 # Disable service start and stop timeout logic of systemd for mysqld service.
 TimeoutSec=0
@@ -52,7 +52,7 @@ PermissionsStartOnly=true
 
 # Start main service
 #ExecStart=/app/mysql/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid $MYSQLD_OPTS
-ExecStart=/app/mysql/bin/mysqld --defaults-file=/etc/my.cnf
+ExecStart=/app/mysql/bin/mysqld --daemonize    
 
 # Use this to switch malloc implementation
 EnvironmentFile=-/etc/sysconfig/mysql

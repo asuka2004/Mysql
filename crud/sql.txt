@@ -1,8 +1,4 @@
 insert into test(id,username,servnumber,password,createtime)
-	values('0','user0','101','evevrwdt',now());
-insert into test(id,username,servnumber,password,createtime)
-	values('1','user1','102','upetntqs',now());
-insert into test(id,username,servnumber,password,createtime)
 	values('2','user2','103','zeqbervu',now());
 insert into test(id,username,servnumber,password,createtime)
 	values('3','user3','104','iqawqcpj',now());

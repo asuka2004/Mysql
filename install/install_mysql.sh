@@ -25,18 +25,6 @@ Check_User(){
 Setup_User(){
 	groupadd mysql
 	useradd -s /sbin/nologin -g mysql -M mysql
-	chown -R mysql:mysql ${App_Path}/mysql
-}
-
-Setup_Config(){
-	echo "basedir=${App_Path}/mysql" >> /etc/my.cnf
-	echo "datadir=${App_Path}/mysql/data" >> /etc/my.cnf
-	echo "socket=/var/lib/mysql/mysql.sock">>/etc/my.cnf
-	echo "server_id=1">>/etc/my.cnf
-	echo "log_error=${App_Path}/mysql/data/mysql.err">>/etc/my.cnf
-	echo "port=3306">>/etc/my.cnf
-	echo "export PATH=${App_Path}/mysql/bin:$PATH">>/etc/profile
-	source /etc/profile
 }
 
 Install_Mysql(){
@@ -45,13 +33,28 @@ Install_Mysql(){
 	tar -zxvf  mysql-5.7.37-el7-x86_64.tar.gz 
 	mv mysql-5.7.37-el7-x86_64 ${App_Path}/mysql-5.7.37
 	ln -s ${App_Path}/mysql-5.7.37  ${App_Path}/mysql
-	${App_Path}/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=${App_Path}/mysql --datadir=${App_Path}/mysql/data
+	chown -R mysql:mysql ${App_Path}/mysql*
+	${App_Path}/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=${App_Path}/mysql --datadir=${App_Path}/mysql/data 
 	if [ $? -eq 0 ] 
          then
                  action "Success to install " /bin/true
         else
                  action "Fail to install" /bin/false
+		 exit
         fi  
+}
+
+Setup_Config(){
+	echo "[mysqld]" >> /etc/my.cnf
+	echo "basedir=${App_Path}/mysql" >> /etc/my.cnf
+	echo "datadir=${App_Path}/mysql/data" >> /etc/my.cnf
+	echo "socket=/var/lib/mysql/mysql.sock">>/etc/my.cnf
+	echo "server_id=1">>/etc/my.cnf
+	echo "user=mysql">>/etc/my.cnf
+	echo "log_error=${App_Path}/mysql/data/mysql.err">>/etc/my.cnf
+	echo "port=3306">>/etc/my.cnf
+	echo "export PATH=${App_Path}/mysql/bin:$PATH">>/etc/profile
+	source /etc/profile
 }
 
 Setup_daemon(){
@@ -59,6 +62,13 @@ Setup_daemon(){
 	systemctl daemon-reload
   	systemctl enable mysqld
 	systemctl start mysqld
+	if [ $? -eq 0 ] 
+         then
+                 action "Success to daemon" /bin/true
+        else
+                 action "Fail to daemon" /bin/false
+		 exit
+        fi  
 }
 
 main(){
@@ -66,6 +76,6 @@ main(){
 	Setup_User
 	Install_Mysql
 	Setup_Config	
-#	Setup_daemon
+	Setup_daemon
 }
 main 
