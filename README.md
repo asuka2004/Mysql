@@ -14,9 +14,9 @@
 
 ### CRUD Script
 
-1.create_data.sh 可以產生大量的sql語法檔案sql.txt，並由crud_mysql.sh匯入mysql
+1.create_data.sh 可以產生大量的sql語法檔案sql.txt，並匯入mysql
  
-2.crud_mysql.sh，新增、刪除、修改、查詢資料
+2.crud_mysql.sh，增、刪、修、查資料
 
 ### Backup DB Script
     
