@@ -23,11 +23,13 @@ Check_User(){
 }
 
 Setup_User(){
+	echo "Add User Mysql. Please wait.................."
 	groupadd mysql
 	useradd -s /sbin/nologin -g mysql -M mysql
 }
 
 Install_Mysql(){
+	echo "Start to install Mysql. Please wait.........."
 	cd ${Soft_Path}/software
 	#wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.37-el7-x86_64.tar.gz
 	tar -zxvf  mysql-5.7.37-el7-x86_64.tar.gz 
@@ -37,18 +39,19 @@ Install_Mysql(){
 	${App_Path}/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=${App_Path}/mysql --datadir=${App_Path}/mysql/data 
 	if [ $? -eq 0 ] 
          then
-                 action "Success to install " /bin/true
+                 action "Success to install Mysql " /bin/true
         else
-                 action "Fail to install" /bin/false
+                 action "Fail to install Mysql" /bin/false
 		 exit
         fi  
 }
 
 Setup_Config(){
+	echo "Setup Mysql config. Please wait..............."
 	echo "[mysqld]" >> /etc/my.cnf
 	echo "basedir=${App_Path}/mysql" >> /etc/my.cnf
 	echo "datadir=${App_Path}/mysql/data" >> /etc/my.cnf
-	echo "socket=/var/lib/mysql/mysql.sock">>/etc/my.cnf
+	echo "socket=/tmp/mysql.sock">>/etc/my.cnf
 	echo "server_id=1">>/etc/my.cnf
 	echo "user=mysql">>/etc/my.cnf
 	echo "log_error=${App_Path}/mysql/data/mysql.err">>/etc/my.cnf
@@ -58,24 +61,29 @@ Setup_Config(){
 }
 
 Setup_daemon(){
+	echo "Setup daemon program. Please wait............."
 	cp ${Soft_Path}/script/mysqld.service /etc/systemd/system/mysqld.service
 	systemctl daemon-reload
   	systemctl enable mysqld
 	systemctl start mysqld
 	if [ $? -eq 0 ] 
          then
-                 action "Success to daemon" /bin/true
+                 action "Success to daemon system" /bin/true
         else
-                 action "Fail to daemon" /bin/false
+                 action "Fail to daemon system" /bin/false
 		 exit
         fi  
 }
 
 main(){
 	Check_User
+	echo -e "------------------------------------------------------------------- \n" 	
 	Setup_User
+	echo -e "------------------------------------------------------------------- \n" 
 	Install_Mysql
-	Setup_Config	
+	echo -e "------------------------------------------------------------------- \n" 
+	Setup_Config
+	echo -e "------------------------------------------------------------------- \n" 
 	Setup_daemon
 }
 main 

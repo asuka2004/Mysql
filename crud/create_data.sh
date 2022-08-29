@@ -11,14 +11,13 @@ export PATH=$PATH
 Script_Path=/tool/script
 [ ! -d ${Script_Path} ] && mkdir -p ${Script_Path}
 
-echo "Please input Servnum Number:"
-read Server
-echo "Please input SQL Number:"
-read Number
+read -p "Please input ServNumber:" Server
+read -p "Please input SQL Number:" Number
+
 for (( i=0;i<$Number;i++ ))
 do
-	Pass=`head /dev/urandom | tr -dc a-z | head -c 8`
+	Pwd=`head /dev/urandom | tr -dc a-z | head -c 8`
 	let Server=Server+1
-	echo "insert into test(id,username,servnumber,password,createtime)
-	values('$i','user${i}','${Server}','${Pass}',now());" >>${Script_Path}/sql.txt
+	echo "insert into test(id,username,servnum,password,createtime)
+	values('$i','user${i}','${Server}','${Pwd}',now());" >>${Script_Path}/sql.txt
 done

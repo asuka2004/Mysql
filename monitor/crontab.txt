@@ -1,2 +1,2 @@
-echo "Monitor DB" >>/var/spool/cron/root
-echo */5 * * * * /bin/sh /tool/script/monitor_db.sh >>/var/spool/cron/root
+echo "#Monitor DB by Kung" >>/var/spool/cron/root
+echo "*/5 * * * * /bin/sh /tool/script/monitor_mysql.sh" >>/var/spool/cron/root
