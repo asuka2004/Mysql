@@ -20,20 +20,19 @@ SOCKET=/tmp/mysql.sock
 MYCMD="${App_Path}/mysql/bin/mysql --login-path=Pwd -S $SOCKET -h localhost"
 
 Create_db(){
-	
-	echo "Create&Insert database and table. Please Wait 10 ....."
+	echo "Create&Insert database and table. Please Wait ........ ....."
 	$MYCMD -e "create database db1;use db1;create table test(id int(7) zerofill auto_increment not null,username varchar(20),servnumber varchar(30),password varchar(20),createtime datetime,primary key (id))DEFAULT CHARSET=utf8;source ${Soft_Path}/script/sql.txt;"
 	if [ $? -eq 0 ] 
          then
-                 action "Success to create " /bin/true
+                 action "Success to create database " /bin/true
         else
-                 action "Fail to create" /bin/false
+                 action "Fail to create database" /bin/false
 		 exit
         fi  
 }
 
 Read_db(){
-	echo "Select user. Please wait 10........"
+	echo "Select user from db. Please wait ........................"
 	$MYCMD -e "use db1;select * from test where username='user10';"
 	if [ $? -eq 0 ] 
          then
@@ -45,7 +44,7 @@ Read_db(){
 }
 
 Update_db(){
-	echo "Del user. Please wait 10........"
+	echo "Update information. Please wait ........"
 	$MYCMD -e "use db1;update test set username='Kung' where username='user10';"
 	if [ $? -eq 0 ] 
          then
@@ -57,7 +56,7 @@ Update_db(){
 }
 
 Delete_db(){
-	echo "Delete user. Please wait 10....."
+	echo "Delete user from db. Please wait .........."
 	$MYCMD -e "use db1;delete from test where username='user100';"
 	if [ $? -eq 0 ] 
          then
@@ -70,11 +69,11 @@ Delete_db(){
 
 main(){
 	Create_db
-	echo "-------------------------------------------------------"
+	echo -e "------------------------------------------------------------------- \n"	
 	Read_db
-	echo "-------------------------------------------------------"
+	echo -e "------------------------------------------------------------------- \n"	
 	Update_db	
-	echo "-------------------------------------------------------"
+	echo -e "------------------------------------------------------------------- \n"	
 	Delete_db
 }
 main

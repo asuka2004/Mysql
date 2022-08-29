@@ -19,8 +19,8 @@ File_Path=/var/spool/cron/root
 
 if [ `grep "monitor_mysql" ${File_Path}|wc -l` -lt 1 ]
  then
-	echo "Monitor DB" >>/var/spool/cron/root
-	echo "*/5 * * * * /bin/sh  ${Soft_Path}/script/monitor_mysql.sh" >>/var/spool/cron/root
+	echo "#Monitor DB" >>/var/spool/cron/root
+	echo "*/5 * * * * /bin/sh  ${Soft_Path}/script/monitor_mysql.sh>/dev/null 2>&1" >>/var/spool/cron/root
 else
 	echo "Nothing ">/dev/null 2>&1		
 fi
@@ -28,7 +28,7 @@ fi
 
 if [ `netstat -ntulp|grep mysqld|wc -l` -gt 0 ]
  then
-	echo  "Mysql is normal"  >/dev/null 2>&1
+	echo  "Mysql is normal" >/dev/null 2>&1
 else
 	Critical="Warning!!!! Mysql is down"
 	echo $Critical | tee | mail -s "$Critical" root@localhost
