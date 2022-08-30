@@ -11,8 +11,10 @@ export PATH=$PATH
 
 App_Path=/app
 [ ! -d ${App_Path} ] && mkdir -p ${App_Path}
-Soft_Path=/tool
+Soft_Path=/tool/software
 [ ! -d ${Soft_Path} ] && mkdir -p ${Soft_Path}
+Script_Path=/tool/script
+[ ! -d ${Script_Path} ] && mkdir -p ${Script_Path}
 
 Check_User(){
 	if [ $UID -ne 0 ]
@@ -30,7 +32,7 @@ Setup_User(){
 
 Install_Mysql(){
 	echo "Start to install Mysql. Please wait.........."
-	cd ${Soft_Path}/software
+	cd ${Soft_Path}
 	#wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.37-el7-x86_64.tar.gz
 	tar -zxvf  mysql-5.7.37-el7-x86_64.tar.gz 
 	mv mysql-5.7.37-el7-x86_64 ${App_Path}/mysql-5.7.37
@@ -56,13 +58,13 @@ Setup_Config(){
 	echo "user=mysql">>/etc/my.cnf
 	echo "log_error=${App_Path}/mysql/data/mysql.err">>/etc/my.cnf
 	echo "port=3306">>/etc/my.cnf
-	echo "export PATH=${App_Path}/mysql/bin:$PATH">>/etc/profile
+	echo 'export PATH=${App_Path}/mysql/bin:$PATH'>>/etc/profile
 	source /etc/profile
 }
 
 Setup_daemon(){
 	echo "Setup daemon program. Please wait............."
-	cp ${Soft_Path}/script/mysqld.service /etc/systemd/system/mysqld.service
+	cp ${Script_Path}/mysqld.service /etc/systemd/system/mysqld.service
 	systemctl daemon-reload
   	systemctl enable mysqld
 	systemctl start mysqld

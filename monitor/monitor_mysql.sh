@@ -12,7 +12,9 @@ export PATH=$PATH
 
 App_Path=/app
 [ ! -d ${App_Path} ] && mkdir -p ${App_Path}
-Soft_Path=/tool
+Soft_Path=/tool/software
+[ ! -d ${Soft_Path} ] && mkdir -p ${Soft_Path}
+Script_Path=/tool/script
 [ ! -d ${Soft_Path} ] && mkdir -p ${Soft_Path}
 
 File_Path=/var/spool/cron/root
@@ -20,7 +22,7 @@ File_Path=/var/spool/cron/root
 if [ `grep "monitor_mysql" ${File_Path}|wc -l` -lt 1 ]
  then
 	echo "#Monitor DB" >>/var/spool/cron/root
-	echo "*/5 * * * * /bin/sh  ${Soft_Path}/script/monitor_mysql.sh>/dev/null 2>&1" >>/var/spool/cron/root
+	echo "*/5 * * * * /bin/sh  ${Script_Path}/monitor_mysql.sh>/dev/null 2>&1" >>/var/spool/cron/root
 else
 	echo "Nothing ">/dev/null 2>&1		
 fi

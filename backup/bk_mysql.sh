@@ -11,8 +11,10 @@ export PATH=$PATH
 
 App_Path=/app
 [ ! -d ${App_Path} ] && mkdir -p ${App_Path}
-Soft_Path=/tool
+Soft_Path=/tool/software
 [ ! -d ${Soft_Path} ] && mkdir -p ${Soft_Path}
+Script_Path=/tool/script
+[ ! -d ${Script_Path} ] && mkdir -p ${Soft_Path}
 DBPATH=/backup
 [ ! -d "$DBPATH" ] && mkdir $DBPATH
 

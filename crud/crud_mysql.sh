@@ -13,7 +13,9 @@ export PATH=$PATH
 
 App_Path=/app
 [ ! -d ${App_Path} ] && mkdir -p ${App_Path}
-Soft_Path=/tool
+Soft_Path=/tool/software
+[ ! -d ${Soft_Path} ] && mkdir -p ${Soft_Path}
+Script_Path=/tool/script
 [ ! -d ${Soft_Path} ] && mkdir -p ${Soft_Path}
 
 SOCKET=/tmp/mysql.sock
@@ -21,7 +23,7 @@ MYCMD="${App_Path}/mysql/bin/mysql --login-path=Pwd -S $SOCKET -h localhost"
 
 Create_db(){
 	echo "Create&Insert database and table. Please Wait ........ ....."
-	$MYCMD -e "create database db1;use db1;create table test(id int(7) zerofill auto_increment not null,username varchar(20),servnumber varchar(30),password varchar(20),createtime datetime,primary key (id))DEFAULT CHARSET=utf8;source ${Soft_Path}/script/sql.txt;"
+	$MYCMD -e "create database db1;use db1;create table test(id int(7) zerofill auto_increment not null,username varchar(20),servnumber varchar(30),password varchar(20),createtime datetime,primary key (id))DEFAULT CHARSET=utf8;source ${Script_Path}/sql.txt;"
 	if [ $? -eq 0 ] 
          then
                  action "Success to create database " /bin/true
