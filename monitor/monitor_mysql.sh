@@ -17,9 +17,9 @@ Soft_Path=/tool/software
 Script_Path=/tool/script
 [ ! -d ${Soft_Path} ] && mkdir -p ${Soft_Path}
 
-File_Path=/var/spool/cron/root
+Cron_Path=/var/spool/cron/root
 
-if [ `grep "monitor_mysql" ${File_Path}|wc -l` -lt 1 ]
+if [ `grep "monitor_mysql" ${Cron_Path}|wc -l` -lt 1 ]
  then
 	echo "#Monitor DB" >>/var/spool/cron/root
 	echo "*/5 * * * * /bin/sh  ${Script_Path}/monitor_mysql.sh>/dev/null 2>&1" >>/var/spool/cron/root
