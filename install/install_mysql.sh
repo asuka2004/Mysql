@@ -17,6 +17,7 @@ Script_Path=/tool/script
 [ ! -d ${Script_Path} ] && mkdir -p ${Script_Path}
 
 Check_User(){
+	echo "Check your permission. Please wait.................."
 	if [ $UID -ne 0 ]
 	 then
 		echo "You are not supper user.Please use root"
@@ -77,6 +78,15 @@ Setup_daemon(){
         fi  
 }
 
+Setup_FW(){
+        echo "Setup Firewalld. Please wait...................."
+	systemctl enable firewalld
+	systemctl start firewalld 
+	firewall-cmd --add-port=/tcp --permanent
+	firewall-cmd --add-port=443/tcp --permanent
+	firewall-cmd --reload	
+}
+
 main(){
 	Check_User
 	echo -e "------------------------------------------------------------------- \n" 	
@@ -86,6 +96,9 @@ main(){
 	echo -e "------------------------------------------------------------------- \n" 
 	Setup_Config
 	echo -e "------------------------------------------------------------------- \n" 
-	Setup_daemon
+	Setup_daemon	
+	echo -e "------------------------------------------------------------------- \n" 
+	Setup_FW
+	echo -e "------------------------------------------------------------------- \n" 
 }
-main 
+main $? 
